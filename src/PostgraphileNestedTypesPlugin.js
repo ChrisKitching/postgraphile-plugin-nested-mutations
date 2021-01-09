@@ -209,6 +209,8 @@ module.exports = function PostGraphileNestedTypesPlugin(
         !omit(constraint, 'delete');
 
       if (
+        // Ignore composite types: they're not tables, and I don't care about doing this properly.
+        foreignTable.classKind === 'c' ||
         (!connectable && !creatable && !deleteable && !updateable) ||
         omit(foreignTable, 'read')
         // || primaryKey.keyAttributes.some(key => omit(key, 'read'))
